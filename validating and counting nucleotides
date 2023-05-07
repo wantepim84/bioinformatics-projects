@@ -1,0 +1,38 @@
+Nucleotides = ["A", "T", "C", "G"]
+
+#DNA Tool kit
+def validateSeq(dna_seq):
+  tmpseq= dna_seq.upper()
+  for nuc in tmpseq:
+    if nuc not in Nucleotides:
+      return False
+  return tmpseq
+  
+#Testing DNA Tool kit
+randRNAStr= 'ccggtaa'
+print(validateSeq(randRNAStr))
+
+randRNAStr= 'ggtaad'
+print(validateSeq(randRNAStr))
+
+randRNAStr= 'AcgGtaaTt'
+print(validateSeq(randRNAStr))
+
+#Creating a random DNA sequence for testong:
+import random
+randRNAStr= ''. join([random.choice(Nucleotides)
+                      for nuc in range(50)])
+
+DNAstr = validateSeq(randRNAStr)
+print(validateSeq(DNAstr))
+
+#Count nucleotide frequency
+def countNucFrequency(seq):
+  tmpFreqDict = {'A': 0, 'C': 0, 'G': 0, 'T': 0}
+  for nuc in seq:
+    tmpFreqDict[nuc] += 1
+  return tmpFreqDict
+
+#Testing count nucleotide function
+print(validateSeq(randRNAStr))
+print(countNucFrequency(DNAstr))
