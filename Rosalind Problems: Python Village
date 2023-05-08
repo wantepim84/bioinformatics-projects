@@ -1,0 +1,39 @@
+import this
+
+a = dataset
+b = dataset
+result = a**2 + b**2
+print(f'{a}^2 + {b}^2 = {result}')
+
+wordonestart = dataset
+wordoneend = dataset
+wordtwostart = dataset
+wordtwoend= dataset
+txtstr = 'dataset'
+print(f'{txtstr[wordonestart:wordoneend + 1]} {txtstr[wordtwostart:wordtwoend + 1]}')
+
+startpos = dataset
+endpos = dataset
+result = 0
+for x in range(startpos, endpos + 1):
+  if x % 2 != 0:
+    result += x
+print(result)
+
+outputfile = []
+with open('dataset.txt', 'r') as f:
+  outputfile = [line for pos, line in enumerate(
+      f.readlines()) if pos % 2 != 0]
+with open('output.txt', 'w') as f:
+  f.write(''.join([line for line in outputfile]))
+
+txtstr= 'dataset'
+wordcountdict ={}
+
+for word in txtstr.split(' '):
+  if word in wordcountdict:
+    wordcountdict[word] += 1
+  else:
+    wordcountdict[word] = 1  
+for key, value in wordcountdict.items():
+  print(key, value)
