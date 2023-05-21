@@ -1,0 +1,29 @@
+def readFile(filePath):
+    with open(filePath, 'r') as f:
+        return[l.strip() for l in f.readlines()]
+
+def gc_content(seq):
+ """GC Content in DNA/RNA sequence"""
+ return round(((seq.count('C') + seq.count('G')) / len(seq) * 100), 6)
+
+FASTAfile = readFile('test_data/gc_content.txt')
+
+FASTAdict = {}
+
+FASTAlabel = ""
+print(FASTAfile)
+for line in FASTAfile:
+   if '>' in line:
+      FASTAlabel = line
+      FASTAdict[FASTAlabel] = ""
+   else:
+      FASTAdict[FASTAlabel] += line
+print(FASTAdict)
+
+RESULTdict = {key: gc_content(value) for (key, value) in FASTAdict.items()}
+
+print(RESULTdict)
+
+MaxGCKey = max(RESULTdict, key=RESULTdict.get)
+
+print(f'{MaxGCKey[1:]}\n{RESULTdict[MaxGCKey]}')
