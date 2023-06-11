@@ -1,0 +1,36 @@
+dna1 = 'GAGCCTACTAACGGGAT'
+dna2 = 'CATCGTAATGACGGCCT'
+
+#Loop approach
+def h_loop(str_1, str_2):
+    h_distance = 0
+    for position in range(len(str_1)):
+        if str_1[position] != str_2[position]:
+            h_distance += 1
+    return h_distance
+
+print("Loop Hamming distance: ",  end='')
+print(h_loop(dna1, dna2))
+
+#Set approach
+def hset(str_1, str_2):
+    nucleotide_s1 = set([(x, y) for x, y in enumerate(str_1)])
+    nucleotide_s2 = set ([(x, y) for x,y in enumerate(str_2)])
+
+    for x in range(len(nucleotide_s1)):
+        print(sorted(nucleotide_s1)[x], sorted(nucleotide_s2)[x])
+# Differance approach
+        print(nucleotide_s1.difference(nucleotide_s2))
+
+    return len(nucleotide_s1.difference(nucleotide_s2))
+
+
+print("Set Hamming Distance: ")
+print(hset(dna1, dna2))
+
+#Zip approach
+def hzip(str_1, str_2):
+    return len([(n1, n2) for n1, n2 in zip(str_1, str_2) if n1 != n2])
+
+print("Zip Hamming Distance: ", end='')
+print(hzip(dna1, dna2))
