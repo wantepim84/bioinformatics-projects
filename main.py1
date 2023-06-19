@@ -1,30 +1,23 @@
-from DNAToolkit import *
-import random
+#Dna Toolset/ Coding test file
+from bio_seq import bio_seq
+from utilities import read_FASTA, writeTextFile,readFile
 
-randRNAStr= ''. join([random.choice(Nucleotides)
-                      for nuc in range(50)])
+test_dna = bio_seq()
+test_dna.generate_rnd_seq(40, "RNA")
 
-DNAstr = validateSeq(randRNAStr)
+print(test_dna.get_seq_info())
+print(test_dna.nucleotide_frequency())
+print(test_dna.transcription())
+print(test_dna.reverse_complement())
+print(test_dna.gc_content())
+print(test_dna.gc_content_subsec())
+print(test_dna.translate_seq())
+print(test_dna.codon_usage('L'))
 
-print(f'\nSequence : {DNAstr}\n')
-print(f'[1] + Sequence length: {len(DNAstr)}\n')
-print(f'[2] + Nucleutode Frequency: {countNucFrequency(DNAstr)}\n')
-print(f'[3] + DNA/RNA Transcription: {transcription(DNAstr)}\n')
+for rf in test_dna.gen_reading_frames():
+    print(rf)
 
-print(f"[4] + DNA String + Reverse Complement: \n5' {DNAstr} 3'")
-print(f"  {''.join(['|' for c in range (len(DNAstr))])}")
-print(f"3' {reverse_complement(DNAstr)[::-1]}  5' [Complement]")
-print(f"5' {reverse_complement(DNAstr)}  3' [Revrese Complement]\n")
+print(test_dna.proteins_from_rf(['G', 'V', 'M', 'T', 'S', 'Q', 'S', 'I', 'E', 'S', 'L', '_', 'L']))
+print(test_dna.all_proteins_from_orfs())
 
-print(f'[5] + GC Content: {gc_content(DNAstr)}%\n')
-print(f'[6] + GC Content in subsection k=5: {gc_content_subsec(DNAstr, k=5)}\n')
-print(f'[7] + Amionoacids Sequence from DNA: {translate_seq(DNAstr, 0)}\n')
-print(f'[8] + Codon frequency (L): {codon_usage(DNAstr, "L")}\n')
-
-print(f'[9] + Reading frames: ')
-for frame in gen_reading_frames(DNAstr):
-    print(frame)
-
-print('\n[10] + All prots in 6 open reading frames:')
-for prot in all_proteins_from_orfs(DNAstr, 0, 0, True):
-    print(f'{prot}')
+writeTextFile('test.txt', test_dna)
